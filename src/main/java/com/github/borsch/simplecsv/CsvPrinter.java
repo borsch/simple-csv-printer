@@ -1,4 +1,4 @@
-package com.github.borsch.simplecsvprinter;
+package com.github.borsch.simplecsv;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -10,10 +10,10 @@ import org.apache.commons.csv.CSVPrinter;
 
 public class CsvPrinter<T> {
 
-    private final List<CsvColumn<T>> columns;
+    private final List<CsvPrintColumn<T>> columns;
     private final CSVFormat format;
 
-    public CsvPrinter(final List<CsvColumn<T>> columns) {
+    public CsvPrinter(final List<CsvPrintColumn<T>> columns) {
         this(
             columns,
             CSVFormat.DEFAULT
@@ -22,7 +22,7 @@ public class CsvPrinter<T> {
         );
     }
 
-    public CsvPrinter(final List<CsvColumn<T>> columns, final CSVFormat format) {
+    public CsvPrinter(final List<CsvPrintColumn<T>> columns, final CSVFormat format) {
         this.columns = columns;
         this.format = format;
     }
@@ -42,7 +42,7 @@ public class CsvPrinter<T> {
 
     private List<String> getHeaders() {
         return columns.stream()
-            .map(CsvColumn::getColumnHeader)
+            .map(CsvPrintColumn::getColumnHeader)
             .collect(Collectors.toList());
     }
 
